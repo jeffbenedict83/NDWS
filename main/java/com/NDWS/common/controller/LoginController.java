@@ -17,28 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class LoginController {
-/*    @RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
-    public ModelAndView welcomePage() {
-
-        ModelAndView model = new ModelAndView();
-        model.addObject("title", "Spring Security Hello World");
-        model.addObject("message", "This is welcome page!");
-        model.setViewName("hello");
-        return model;
-
-    }
-
-    @RequestMapping(value = "/login**", method = RequestMethod.GET)
-    public ModelAndView adminPage() {
-
-        ModelAndView model = new ModelAndView();
-        model.addObject("title", "Spring Security Hello World");
-        model.addObject("message", "This is protected page!");
-        model.setViewName("login");
-
-        return model;
-    }*/
-
     @RequestMapping(value="/welcome", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
 
