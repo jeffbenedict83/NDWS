@@ -15,12 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 public class NDWSController {
-    /*@RequestMapping(method = RequestMethod.GET)
-    public String printWelcome(ModelMap model) {
-        model.addAttribute("message", "Spring 3 MVC Hello World");
-        return "hello";
-    }*/
-
     @RequestMapping(value = { "/", "/welcome**" }, method = RequestMethod.GET)
     public ModelAndView welcomePage() {
 
