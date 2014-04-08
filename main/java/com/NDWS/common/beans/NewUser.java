@@ -1,10 +1,12 @@
 package com.NDWS.common.beans;
 
-import com.sun.istack.internal.NotNull;
-import org.omg.CosNaming.NamingContextPackage.NotEmpty;
+import com.NDWS.common.Constraints.FieldMatch;
+import com.NDWS.common.Constraints.Username;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,16 +15,33 @@ import javax.validation.constraints.Min;
  * Time: 10:13 PM
  * To change this template use File | Settings | File Templates.
  */
+@FieldMatch.List({
+        @FieldMatch(first = "password", second = "confirmPassword", errorMessage = "The password fields must match")
+})
+@Entity
+@Table(name="NDWS_USER")
 public class NewUser {
 
-    @NotNull @Min(5) @Max(50)
+    @Size(min=5, max=50)
+    @Username
+    @Column(unique = true)
     private String username;
 
-    @NotNull @Min(5) @Max(50)
+    @Size(min=5, max=50)
     private String password;
 
-    @NotNull @Min(5) @Max(50)
+    @Size(min=5, max=50)
     private String confirmPassword;
+
+    public NewUser(String username, String password, String confirmPassword){
+        this.username = username;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+    }
+
+    public NewUser(){
+        //Default Constructor
+    }
 
     public String getUsername() {
         return username;

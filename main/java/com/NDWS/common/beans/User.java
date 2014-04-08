@@ -13,8 +13,6 @@ import javax.persistence.Table;
  * Time: 11:44 PM
  * To change this template use File | Settings | File Templates.
  */
-@Entity
-@Table(name="USER")
 public class User {
     @Id
     @Column(name="id")

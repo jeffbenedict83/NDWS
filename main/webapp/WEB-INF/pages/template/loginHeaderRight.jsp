@@ -12,22 +12,22 @@
         <li id="signupContainer"><a class="signup" id="signupButton" href="#"><span><i>Signup</i></span></a>
             <div class="clear"> </div>
             <div id="signupBox">
-                <form:form id="signupForm" modelAttribute="NewUser" action="/addNewUser" method="POST">
+                <form:form id="signupForm" modelAttribute="newUser" action="/addNewUser" method="POST">
                     <fieldset id="signupbody">
                         <fieldset>
-                            <label for="signupemail">Username<span>*</span></label>
+                            <label for="signupemail">Username<span>*</span></label><br>
+                            <form:errors path="username" cssClass="errorTheme" />
                             <form:input path="username" id="signupemail" />
-                            <form:errors path="username" cssClass="errorblock" />
                         </fieldset>
                         <fieldset>
-                            <label for="signuppassword">Choose Password <span>*</span></label>
-                            <form:input path="password" id="signuppassword" />
-                            <form:errors path="password" cssClass="errorblock" />
+                            <label for="signuppassword">Choose Password <span>*</span></label><br>
+                            <form:errors path="password" cssClass="errorTheme" />
+                            <form:password path="password" id="signuppassword" />
                         </fieldset>
                         <fieldset>
-                            <label for="signuppassword1">Confirm Password <span>*</span></label>
-                            <form:input path="confirmPassword" id="signuppassword1" />
-                            <form:errors path="confirmPassword" cssClass="errorblock" />
+                            <label for="signuppassword1">Confirm Password <span>*</span></label><br>
+                            <form:errors path="confirmPassword" cssClass="errorTheme" />
+                            <form:password path="confirmPassword" id="signuppassword1" />
                         </fieldset>
                         <input type="submit" id="signup" value="Register Now!" />
                     </fieldset>

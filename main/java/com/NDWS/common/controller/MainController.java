@@ -33,11 +33,11 @@ public class MainController {
 
     }
 
-    @RequestMapping(value="/", method = RequestMethod.GET)
+    /*@RequestMapping(value="/", method = RequestMethod.GET)
     public String mainLanding(ModelMap model) {
         return "mainLanding";
 
-    }
+    }*/
 
     @RequestMapping(value="/profile", method = RequestMethod.GET)
     public String profileLanding(ModelMap model) {
@@ -50,21 +50,5 @@ public class MainController {
         return "facebookIntegration";
 
     }
-
-    @RequestMapping(value="/addNewUser", method = RequestMethod.POST)
-    public String addNewUser(@Valid NewUser newUser, BindingResult result, ModelMap model) {
-        if(result.hasErrors()) {
-            return "mainLanding";
-        }
-
-        model.addAttribute("message", "Successfully saved newUser: " + newUser.toString());
-        return "landing";
-    }
-
-    @ModelAttribute("NewUser")
-    public NewUser getNewUser() {
-        return new NewUser();
-    }
-
 }
 
