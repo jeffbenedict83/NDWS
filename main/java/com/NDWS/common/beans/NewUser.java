@@ -15,19 +15,13 @@ import javax.validation.constraints.Min;
  */
 public class NewUser {
 
-    @NotNull
-    @Min(5)
-    @Max(50)
+    @NotNull @Min(5) @Max(50)
     private String username;
 
-    @NotNull
-    @Min(5)
-    @Max(50)
+    @NotNull @Min(5) @Max(50)
     private String password;
 
-    @NotNull
-    @Min(5)
-    @Max(50)
+    @NotNull @Min(5) @Max(50)
     private String confirmPassword;
 
     public String getUsername() {
