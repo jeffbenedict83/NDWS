@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="base.definition"
+                template="/WEB-INF/pages/template/mainTemplate.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="headerRight" value="" />
+        <!--<put-attribute name="menu" value="/WEB-INF/jsp/menu.jsp" />-->
+        <put-attribute name="body" value="" />
+        <!--<put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />-->
+    </definition>
+    <definition name="mainLanding" extends="base.definition">
+        <put-attribute name="title" value="Formerly LDS Singles" />
+        <put-attribute name="headerRight" value="/WEB-INF/pages/template/loginHeaderRight.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/noSecurity/mainLanding.jsp" />
+    </definition>
+    <definition name="landing" extends="base.definition">
+        <put-attribute name="title" value="Formerly LDS Singles Landing" />
+        <put-attribute name="headerRight" value="/WEB-INF/pages/template/secureHeaderRight.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/main/landing.jsp" />
+    </definition>
+    <definition name="profile" extends="base.definition">
+        <put-attribute name="title" value="Profile" />
+        <put-attribute name="headerRight" value="/WEB-INF/pages/template/secureHeaderRight.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/profile/profile.jsp" />
+    </definition>
+    <definition name="facebookIntegration" extends="base.definition">
+        <put-attribute name="title" value="Facebook Integration" />
+        <put-attribute name="headerRight" value="/WEB-INF/pages/template/secureHeaderRight.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/facebookIntegration/facebook.jsp" />
+    </definition>
+</tiles-definitions>

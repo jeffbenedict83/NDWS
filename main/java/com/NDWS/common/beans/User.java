@@ -45,43 +45,43 @@ public class User {
 
     }
 
-    private void setId(Long id){
-        this.id = id;
-    }
-
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    private void setFirstname(String firstname){
-        this.firstname = firstname;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getFirstname(){
+    public String getFirstname() {
         return firstname;
     }
 
-    private void setLastname(String lastname){
-        this.lastname = lastname;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public String getLastname(){
+    public String getLastname() {
         return lastname;
     }
 
-    private void setUsername(String username){
-        this.username = username;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return username;
     }
 
-    private void setPassword(String password){
-        this.password = password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

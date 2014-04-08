@@ -7,14 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+<!----start-content--->
+<div class="content">
     This is where you would integrate with facebook.<br>
     <a href="/profile">Go Back</a>
-    <br>
-    <a href="<c:url value="/j_spring_security_logout" />" > Logout</a>
-</body>
-</html>
+</div>
+<%--end-content--%>

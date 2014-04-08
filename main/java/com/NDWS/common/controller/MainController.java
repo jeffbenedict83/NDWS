@@ -1,11 +1,17 @@
 package com.NDWS.common.controller;
 
+import com.NDWS.common.beans.NewUser;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,25 +30,36 @@ public class MainController {
 
         model.addAttribute("username", name);
         model.addAttribute("message", "Spring Security login + database example");
-        return "main/landing";
+        return "landing";
 
     }
 
     @RequestMapping(value="/", method = RequestMethod.GET)
     public String mainLanding(ModelMap model) {
-        return "noSecurity/mainLanding";
+        return "mainLanding";
 
     }
 
     @RequestMapping(value="/profile", method = RequestMethod.GET)
     public String profileLanding(ModelMap model) {
-        return "profile/profile";
+        return "profile";
 
     }
 
     @RequestMapping(value="/facebookIntegration", method = RequestMethod.GET)
     public String facebookIntegrationLanding(ModelMap model) {
-        return "facebookIntegration/facebook";
+        return "facebookIntegration";
 
     }
+
+    @RequestMapping(value="/addNewUser", method = RequestMethod.POST)
+    public String addNewUser(@Valid NewUser newUser, BindingResult result, ModelMap model) {
+        if(result.hasErrors()) {
+            return "mainLanding";
+        }
+
+        model.addAttribute("message", "Successfully saved newUser: " + newUser.toString());
+        return "landing";
+    }
 }
+

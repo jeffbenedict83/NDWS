@@ -17,7 +17,7 @@ public class LoginController {
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public String login(ModelMap model) {
 
-        return "main/login";
+        return "landing";
 
     }
 
@@ -25,14 +25,14 @@ public class LoginController {
     public String loginerror(ModelMap model) {
 
         model.addAttribute("error", "true");
-        return "main/login";
+        return "mainLanding";
 
     }
 
     @RequestMapping(value="/logout", method = RequestMethod.GET)
     public String logout(ModelMap model) {
 
-        return "main/login";
+        return "mainLanding";
 
     }
 }
