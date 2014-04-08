@@ -1,17 +1,11 @@
 package com.NDWS.common.controller;
 
-import com.NDWS.common.beans.NewUser;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.validation.Valid;
 
 /**
  * Created with IntelliJ IDEA.
@@ -52,7 +46,7 @@ public class MainController {
 
     }
 
-    @RequestMapping(value="/addNewUser", method = RequestMethod.POST)
+/*    @RequestMapping(value="/addNewUser", method = RequestMethod.POST)
     public String addNewUser(@Valid NewUser newUser, BindingResult result, ModelMap model) {
         if(result.hasErrors()) {
             return "mainLanding";
@@ -60,6 +54,11 @@ public class MainController {
 
         model.addAttribute("message", "Successfully saved newUser: " + newUser.toString());
         return "landing";
+    }*/
+
+    @RequestMapping(value="/addNewUser", method = RequestMethod.POST)
+    public String addNewUser(ModelMap model) {
+        return "mainLanding";
     }
 }
 
