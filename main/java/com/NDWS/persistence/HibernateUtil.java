@@ -1,6 +1,7 @@
 package com.NDWS.persistence;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
@@ -9,8 +10,12 @@ public class HibernateUtil {
 
     private static SessionFactory buildSessionFactory() {
         try {
-            // Create the SessionFactory from hibernate.cfg.xml
-            return new Configuration().configure().buildSessionFactory();
+// load from different directory
+            SessionFactory sessionFactory = new Configuration().configure(
+                    "hibernate.cfg.xml")
+                    .buildSessionFactory();
+
+            return sessionFactory;
         }
         catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
@@ -22,10 +27,4 @@ public class HibernateUtil {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-
-    public static void shutdown() {
-        // Close caches and connection pools
-        getSessionFactory().close();
-    }
-
 }

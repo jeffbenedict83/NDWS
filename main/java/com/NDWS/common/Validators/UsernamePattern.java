@@ -14,7 +14,7 @@ import javax.validation.ConstraintValidatorContext;
  * To change this template use File | Settings | File Templates.
  */
 @Component
-public class UniqueUsernameValidator implements ConstraintValidator<Username, String>{
+public class UsernamePattern implements ConstraintValidator<Username, String>{
 
     @Override
     public void initialize(Username paramA) {
@@ -22,10 +22,7 @@ public class UniqueUsernameValidator implements ConstraintValidator<Username, St
 
     @Override
     public boolean isValid(String username, ConstraintValidatorContext ctx) {
-        if(username == null || "".equals(username)){
-            return false;
-        }else{
-
-        }
+        //put in a regex to only allow valid characters
+        return true;
     }
 }

@@ -1,6 +1,8 @@
 package com.NDWS.common.controller;
 
 import com.NDWS.common.beans.NewUser;
+import com.NDWS.persistence.HibernateUtil;
+import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -12,6 +14,7 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import org.hibernate.exception.ConstraintViolationException;
 import javax.validation.Valid;
 
 /**
@@ -32,6 +35,19 @@ public class NewUserController {
     public String addStudent(@Valid @ModelAttribute("newUser")NewUser newUser, BindingResult errors, ModelMap model) {
         if(errors.hasErrors()){
             return "mainLanding";
+        }else{
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+
+            try{
+                session.save(newUser);
+                session.getTransaction().commit();
+            }catch(ConstraintViolationException cve){
+                //no need to print stacktrace, create error;
+                //add error for non unique username
+                errors.rejectValue("username", "error.username", "Duplicate Username");
+                return "mainLanding";
+            }
         }
         return "landing";
     }
