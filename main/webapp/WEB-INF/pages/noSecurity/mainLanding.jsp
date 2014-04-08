@@ -35,7 +35,7 @@
                 <span class="da-arrows-next"> </span>
             </nav>
         </div>
-        <script src="<c:url value="/resources/mytheme/js/jquery.cslider.js" />"></script>
+        <script src="<c:url value="/resources/js/jquery.cslider.js" />"></script>
         <script type="text/javascript">
                 $(function() {
                     $('#da-slider').cslider({
@@ -56,7 +56,7 @@
         <div class="top-grids">
             <div class="top-grid">
                 <div class="product-pic frist-product-pic">
-                    <img src="/resources/mytheme/images/watch-img.png" title="watch" />
+                    <img src="/resources/images/watch-img.png" title="watch" />
                 </div>
                 <span><label>1</label></span>
                 <div class="border"> </div>
@@ -64,7 +64,7 @@
             </div>
             <div class="top-grid">
                 <div class="product-pic">
-                    <img src="/resources/mytheme/images/shoe-img.png" title="shoe" />
+                    <img src="/resources/images/shoe-img.png" title="shoe" />
                 </div>
                 <span><label>2</label></span>
                 <div class="border hide"> </div>
@@ -72,7 +72,7 @@
             </div>
             <div class="top-grid hide">
                 <div class="product-pic">
-                    <img src="/resources/mytheme/images/lap-img.png" title="laptop" />
+                    <img src="/resources/images/lap-img.png" title="laptop" />
                 </div>
                 <span><label>3</label></span>
                 <a href="#">Start The Hunt</a>
@@ -85,7 +85,7 @@
     <%--<div class="mid-grids">
         <div class="wrap">
             <div class="mid-grids-left">
-                <img src="/resources/mytheme/images/app-divices.jpg" title="divices" />
+                <img src="/resources/images/app-divices.jpg" title="divices" />
                 <span> </span>
             </div>
             <div class="mid-grids-right">

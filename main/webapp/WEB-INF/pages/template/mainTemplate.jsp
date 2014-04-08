@@ -3,22 +3,22 @@
 <html>
 <head>
     <title>Formerly LDS Singles</title>
-    <link href="<c:url value="/resources/mytheme/css/style.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/style.css" />" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/x-icon" href="/resources/mytheme/images/fav-icon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/resources/images/fav-icon.png" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <%--strat-slider--%>
-    <script src="<c:url value="/resources/mytheme/js/jquery.min.js" />"></script>
-    <link href="<c:url value="/resources/mytheme/css/slider-style.css" />" rel="stylesheet">
-    <link href="<c:url value="/resources/mytheme/css/ndws.css" />" rel="stylesheet">
-    <script src="<c:url value="/resources/mytheme/js/modernizr.custom.28468.js" />"></script>
+    <script src="<c:url value="/resources/js/jquery.min.js" />"></script>
+    <link href="<c:url value="/resources/css/slider-style.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/ndws.css" />" rel="stylesheet">
+    <script src="<c:url value="/resources/js/modernizr.custom.28468.js" />"></script>
     <!---//strat-slider---->
     <!---start-login-script--->
-    <script src="<c:url value="/resources/mytheme/js/login.js" />"></script>
+    <script src="<c:url value="/resources/js/login.js" />"></script>
     <!---//End-login-script--->
     <!-----768px-menu----->
-    <link href="<c:url value="/resources/mytheme/css/jquery.mmenu.all.css" />" rel="stylesheet">
-    <script src="<c:url value="/resources/mytheme/js/jquery.mmenu.js" />"></script>
+    <link href="<c:url value="/resources/css/jquery.mmenu.all.css" />" rel="stylesheet">
+    <script src="<c:url value="/resources/js/jquery.mmenu.js" />"></script>
     <script type="text/javascript">
         //	The menu on the left
         $(function() {

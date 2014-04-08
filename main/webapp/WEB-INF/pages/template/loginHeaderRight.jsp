@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="top-nav">
     <ul>
         <li><a href="/">Home</a></li>
@@ -11,23 +12,26 @@
         <li id="signupContainer"><a class="signup" id="signupButton" href="#"><span><i>Signup</i></span></a>
             <div class="clear"> </div>
             <div id="signupBox">
-                <form id="signupForm" action="<c:url value='/addNewUser' /> " method="POST">
+                <form:form id="signupForm" modelAttribute="NewUser" action="/addNewUser" method="POST">
                     <fieldset id="signupbody">
                         <fieldset>
                             <label for="signupemail">Username<span>*</span></label>
-                            <input type="text" name="username" id="signupemail" />
+                            <form:input path="username" id="signupemail" />
+                            <form:errors path="username" cssClass="errorblock" />
                         </fieldset>
                         <fieldset>
                             <label for="signuppassword">Choose Password <span>*</span></label>
-                            <input type="password" name="password" id="signuppassword" />
+                            <form:input path="password" id="signuppassword" />
+                            <form:errors path="password" cssClass="errorblock" />
                         </fieldset>
                         <fieldset>
                             <label for="signuppassword1">Confirm Password <span>*</span></label>
-                            <input type="password" name="confirmPassword" id="signuppassword1" />
+                            <form:input path="confirmPassword" id="signuppassword1" />
+                            <form:errors path="confirmPassword" cssClass="errorblock" />
                         </fieldset>
                         <input type="submit" id="signup" value="Register Now!" />
                     </fieldset>
-                </form>
+                </form:form>
             </div>
             <!-- Login Ends Here -->
         </li>
