@@ -1,19 +1,16 @@
 package com.NDWS.common.controller;
 
-import com.NDWS.common.beans.NewUser;
+import com.NDWS.common.beans.User;
 import com.NDWS.persistence.HibernateUtil;
 import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import org.hibernate.exception.ConstraintViolationException;
 import javax.validation.Valid;
 
@@ -25,14 +22,14 @@ import javax.validation.Valid;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-public class NewUserController {
+public class UserController {
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView student() {
-        return new ModelAndView("mainLanding", "newUser", new NewUser());
+        return new ModelAndView("mainLanding", "user", new User());
     }
 
-    @RequestMapping(value = "/addNewUser", method = RequestMethod.POST)
-    public String addStudent(@Valid @ModelAttribute("newUser")NewUser newUser, BindingResult errors, ModelMap model) {
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    public String addStudent(@Valid @ModelAttribute("user")User user, BindingResult errors, ModelMap model) {
         if(errors.hasErrors()){
             return "login";
         }else{
@@ -40,7 +37,7 @@ public class NewUserController {
             try{
                 session = HibernateUtil.getSessionFactory().getCurrentSession();
                 session.beginTransaction();
-                session.save(newUser);
+                session.save(user);
                 session.getTransaction().commit();
             }catch(ConstraintViolationException cve){
                 //no need to print stacktrace, create error;

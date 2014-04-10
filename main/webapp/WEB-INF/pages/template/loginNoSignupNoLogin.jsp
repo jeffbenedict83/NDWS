@@ -12,7 +12,7 @@
         <li id="signupContainer"><a class="signup" id="signupButton" href="#"><span><i>Signup</i></span></a>
             <div class="clear"> </div>
             <div id="signupBox">
-                <form:form id="signupForm" modelAttribute="newUser" action="/addNewUser" method="POST">
+                <form:form id="signupForm" modelAttribute="user" action="/addUser" method="POST">
                     <fieldset id="signupbody">
                         <fieldset>
                             <label for="signupemail">Username<span>*</span></label><br>

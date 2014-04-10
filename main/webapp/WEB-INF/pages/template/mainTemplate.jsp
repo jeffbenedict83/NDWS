@@ -8,15 +8,21 @@
     <link rel="shortcut icon" type="image/x-icon" href="/resources/images/fav-icon.png" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <%--strat-slider--%>
-    <script src="<c:url value="/resources/js/jquery.min.js" />"></script>
+    <%--<script src="<c:url value="/resources/js/jquery.min.js" />"></script>--%>
     <link href="<c:url value="/resources/css/slider-style.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/ndws.css" />" rel="stylesheet">
     <script src="<c:url value="/resources/js/modernizr.custom.28468.js" />"></script>
     <!---//strat-slider---->
     <!---start-login-script--->
-    <script src="<c:url value="/resources/js/login.js" />"></script>
     <!---//End-login-script--->
     <!-----768px-menu----->
+    <link rel="stylesheet" href="/resources/css/jquery-ui.css">
+    <script src="/resources/js/jquery-1.10.2.js"></script>
+    <script src="/resources/js/jquery-ui.js"></script>
+
+
+
+    <script src="<c:url value="/resources/js/login.js" />"></script>
     <link href="<c:url value="/resources/css/jquery.mmenu.all.css" />" rel="stylesheet">
     <script src="<c:url value="/resources/js/jquery.mmenu.js" />"></script>
     <script type="text/javascript">
@@ -75,7 +81,8 @@
             <h3>Quick Links</h3>
             <ul>
                 <li><a href="/">Home</a></li>
-                <li><a href="#">About Features</a></li>
+                <li><a href="javascript:openDialog('About Title', 'Need to send some awesome html for the about dialog')">About</a></li>
+                <li><a href="javascript:openDialog('Features Title', 'Need to send some awesome html for the features dialog')">Features</a></li>
                 <li><a href="/loginDirect">Login</a></li>
                 <li><a href="/loginDirect">Sign Up</a></li>
             </ul>
@@ -107,4 +114,42 @@
 <!---//End-bottom-footer-grids---->
 </body>
 </html>
+<div id="dialog" class="myMainDialog"></div>
+<script>
+    var target = $(this);
+
+    $("#dialog").dialog({
+        autoOpen: false,
+        show: {
+            effect: "blind",
+            duration: 300
+        },
+        hide: {
+            effect: "explode",
+            duration: 300
+        },
+        open: function (event, ui) {
+            $(".ui-widget-overlay").css({
+                opacity:0.3,
+                filter: "Alpha(Opacity=100)",
+                backgroundColor: "black",
+                zIndex: 30
+            });
+        },
+        modal: true,
+        position: ['top', 150],
+        zIndex: 1000,
+        draggable: false
+    });
+
+    function openDialog(dialogTitle, dialogHtml){
+        if(dialogHtml == null || '' == dialogHtml){
+            dialogHtml = "this worked";
+        }
+        var theDialog = $("#dialog");
+        theDialog.dialog("option", "title", dialogTitle);
+        theDialog.html(dialogHtml);
+        theDialog.dialog( "open" );
+    }
+</script>
 

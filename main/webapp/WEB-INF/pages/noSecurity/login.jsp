@@ -4,7 +4,7 @@
 <div class="content" style="padding-top: 10px; padding-bottom: 10px;">
     <div class="horizontalAlignContent">
         <div class="signupFormLogin">
-            <form:form id="signupForm" modelAttribute="newUser" action="/addNewUser" method="POST">
+            <form:form id="signupForm" modelAttribute="user" action="/addUser" method="POST">
                 <span class="signupBlue">Signup:</span>
                 <fieldset id="signupbody">
                     <fieldset>

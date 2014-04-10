@@ -5,11 +5,18 @@
 
 <hibernate-mapping package="com.NDWS.common.beans">
 
-    <class name="NewUser" table="NDWS_USER">
+    <class name="com.NDWS.common.beans.User" table="NDWS_USER">
         <id name="id" column="ID">
             <generator class="native"/>
         </id>
         <property name="username" column="USERNAME" unique-key="true"/>
         <property name="password" column="PASSWORD"/>
+        <one-to-one name="userProfile" class="com.NDWS.common.beans.UserProfile"
+                    cascade="save-update"></one-to-one>
     </class>
+    <query name="tester">
+        <![CDATA[
+            from NDWS_USER nu where nu.username=:username
+        ]]>
+    </query>
 </hibernate-mapping>

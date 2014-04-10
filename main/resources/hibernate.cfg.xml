@@ -18,7 +18,9 @@
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
 
-        <mapping resource="/org/hibernate/domain/NewUser.hbm.xml"></mapping>
+        <mapping resource="/org/hibernate/domain/User.hbm.xml"></mapping>
+        <mapping resource="/org/hibernate/domain/UserProfile.hbm.xml"></mapping>
+        <mapping class="com.NDWS.common.beans.User"/>
 
     </session-factory>
 </hibernate-configuration>

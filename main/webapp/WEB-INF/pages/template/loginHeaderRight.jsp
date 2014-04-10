@@ -3,8 +3,8 @@
 <div class="top-nav">
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Features</a></li>
+        <li><a href="javascript:openDialog('About Title', 'Need to send some awesome html for the about dialog')">About</a></li>
+        <li><a href="javascript:openDialog('Features Title', 'Need to send some awesome html for the features dialog')">Features</a></li>
     </ul>
 </div>
 <div class="sign-ligin-btns">
@@ -12,7 +12,7 @@
         <li id="signupContainer"><a class="signup" id="signupButton" href="#"><span><i>Signup</i></span></a>
             <div class="clear"> </div>
             <div id="signupBox">
-                <form:form id="signupForm" modelAttribute="newUser" action="/addNewUser" method="POST">
+                <form:form id="signupForm" modelAttribute="user" action="/addUser" method="POST">
                     <fieldset id="signupbody">
                         <fieldset>
                             <label for="signupemail">Username<span>*</span></label><br>

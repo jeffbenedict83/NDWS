@@ -1,16 +1,13 @@
 package com.NDWS.common.controller;
 
+import com.NDWS.common.beans.UserProfile;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import com.NDWS.common.beans.NewUser;
-
-import javax.validation.Valid;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * Created with IntelliJ IDEA.
@@ -38,12 +35,6 @@ public class MainController {
         return "mainLanding";
 
     }*/
-
-    @RequestMapping(value="/profile", method = RequestMethod.GET)
-    public String profileLanding(ModelMap model) {
-        return "profile";
-
-    }
 
     @RequestMapping(value="/facebookIntegration", method = RequestMethod.GET)
     public String facebookIntegrationLanding(ModelMap model) {

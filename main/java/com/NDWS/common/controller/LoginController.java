@@ -1,6 +1,6 @@
 package com.NDWS.common.controller;
 
-import com.NDWS.common.beans.NewUser;
+import com.NDWS.common.beans.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,20 +18,20 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginController {
     @RequestMapping(value="/login", method = RequestMethod.GET)
     public ModelAndView login(ModelMap model) {
-        return new ModelAndView("login", "newUser", new NewUser());
+        return new ModelAndView("login", "user", new User());
     }
 
     @RequestMapping(value="/loginFailed", method = RequestMethod.GET)
     public ModelAndView loginerror(ModelMap model) {
 
         model.addAttribute("error", "Invalid Login!");
-        return new ModelAndView("login", "newUser", new NewUser());
+        return new ModelAndView("login", "user", new User());
 
     }
 
     @RequestMapping(value="/loginDirect", method = RequestMethod.GET)
     public ModelAndView loginDirect(ModelMap model) {
-        return new ModelAndView("login", "newUser", new NewUser());
+        return new ModelAndView("login", "user", new User());
     }
 
     /*@RequestMapping(value="/logout", method = RequestMethod.GET)
