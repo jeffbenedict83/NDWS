@@ -25,13 +25,13 @@
             $('nav#menu-left').mmenu();
         });
     </script>
-    <c:if test="${not empty error}">
+    <%--<c:if test="${not empty error}">
         <script type="text/javascript">
             $(function() {
                 alert('Invalid Login');
             });
         </script>
-    </c:if>
+    </c:if>--%>
     <!-----//768px-menu----->
 </head>
 <body>
@@ -76,8 +76,8 @@
             <ul>
                 <li><a href="/">Home</a></li>
                 <li><a href="#">About Features</a></li>
-                <li><a href="/login">Login</a></li>
-                <li><a href="#">Sign Up</a></li>
+                <li><a href="/loginDirect">Login</a></li>
+                <li><a href="/loginDirect">Sign Up</a></li>
             </ul>
         </div>
         <div class="footer-grid">
@@ -99,13 +99,7 @@
             <p class="copy-right">Template by <a href="#">W3layouts</a></p>
         </div>
         <div class="footer-grid">
-            <h3>Newsletter</h3>
-            <p>Subscribe to our newsletter to keep up-to-date with all the latest news.</p>
-            <form>
-                <input type="text" class="text" value="Your Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Name';}">
-                <input type="text" class="text" value="Your Email" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Your Email';}">
-                <input type="submit" value="subscribe" />
-            </form>
+            <img src="/resources/images/fLogo.png"/>
         </div>
         <div class="clear"> </div>
     </div>

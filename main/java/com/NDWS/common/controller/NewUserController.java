@@ -34,19 +34,35 @@ public class NewUserController {
     @RequestMapping(value = "/addNewUser", method = RequestMethod.POST)
     public String addStudent(@Valid @ModelAttribute("newUser")NewUser newUser, BindingResult errors, ModelMap model) {
         if(errors.hasErrors()){
-            return "mainLanding";
+            return "login";
         }else{
-            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-            session.beginTransaction();
-
+            Session session = null;
             try{
+                session = HibernateUtil.getSessionFactory().getCurrentSession();
+                session.beginTransaction();
                 session.save(newUser);
                 session.getTransaction().commit();
             }catch(ConstraintViolationException cve){
                 //no need to print stacktrace, create error;
                 //add error for non unique username
                 errors.rejectValue("username", "error.username", "Duplicate Username");
-                return "mainLanding";
+                model.addAttribute("openSignup", "1");
+                if(session != null){
+                    session.getTransaction().rollback();
+                }
+                return "login";
+            }catch(Exception e){
+                e.printStackTrace();
+                //something bad happened.
+                errors.rejectValue("username", "error.username", "An error occured while creating your user!");
+                if(session != null){
+                    session.getTransaction().rollback();
+                }
+                return "login";
+            }finally{
+                if(session != null){
+                    //session.close();
+                }
             }
         }
         return "landing";

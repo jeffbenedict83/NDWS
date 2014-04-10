@@ -11,6 +11,11 @@
         <put-attribute name="body" value="" />
         <!--<put-attribute name="footer" value="/WEB-INF/jsp/footer.jsp" />-->
     </definition>
+    <definition name="login" extends="base.definition">
+        <put-attribute name="title" value="Formerly LDS Singles" />
+        <put-attribute name="headerRight" value="/WEB-INF/pages/template/loginNoSignupNoLogin.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/noSecurity/login.jsp" />
+    </definition>
     <definition name="mainLanding" extends="base.definition">
         <put-attribute name="title" value="Formerly LDS Singles" />
         <put-attribute name="headerRight" value="/WEB-INF/pages/template/loginHeaderRight.jsp" />

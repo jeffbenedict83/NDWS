@@ -8,8 +8,6 @@ $(function() {
         event.stopPropagation();
         loginBox.toggle();
         signupBox.toggle(false);
-
-
     });
 
     $('#signupButton').click(function(event){

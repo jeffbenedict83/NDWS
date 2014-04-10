@@ -11,7 +11,7 @@
         <intercept-url pattern="/profile*" access="ROLE_USER" />
         <intercept-url pattern="/facebookIntegration*" access="ROLE_USER" />
         <form-login login-page="/" default-target-url="/landing"
-                    authentication-failure-url="/" />
+                    authentication-failure-url="/loginFailed" />
         <logout logout-success-url="/" />
     </http>
 

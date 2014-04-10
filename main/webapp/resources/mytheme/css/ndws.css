@@ -9,3 +9,37 @@
 .errorTheme {
     color: #F36EA7;
 }
+
+.signupFormLogin{
+    width: 270px;
+    display: inline-block;
+    *display: inline;
+    vertical-align: text-top;
+}
+
+.loginFormLogin{
+    width: 270px;
+    display: inline-block;
+    *display: inline;
+    vertical-align: text-top;
+}
+
+.signupBlue{
+    color: #53CBE9;
+}
+
+.loginPink{
+    color: #F36EA7;
+}
+
+.loginSpacer{
+    width: 90px;
+    display: inline-block;
+    *display: inline;
+}
+
+.horizontalAlignContent{
+    margin-left:auto;
+    margin-right:auto;
+    width: 639px;
+}
