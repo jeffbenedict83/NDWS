@@ -1,9 +1,6 @@
 package com.NDWS.common.beans;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -17,14 +14,16 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name="NDWS_USER_PROFILE")
 public class UserProfile {
-    //from the User Class
-    private Integer userId;
-    private User user;
+    @Id
+    @Column(name="NDWS_USER_ID",nullable = false)
+    private int ndwsUserId;
 
     @Size(min=1, max=50)
+    @Column(name="FIRST_NAME",nullable = false)
     private String firstName;
 
     @Size(min=1, max=50)
+    @Column(name="LAST_NAME",nullable = false)
     private String lastName;
 
     public UserProfile(String firstName, String lastName){
@@ -32,24 +31,20 @@ public class UserProfile {
         this.lastName = lastName;
     }
 
+/*    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ndwsUserId")
+    User user;*/
+
     public UserProfile(){
         //default constructor
     }
 
-    public Integer getUserId() {
-        return userId;
+    public int getNdwsUserId() {
+        return ndwsUserId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    public void setNdwsUserId(int ndwsUserId) {
+        this.ndwsUserId = ndwsUserId;
     }
 
     public String getFirstName() {
@@ -67,4 +62,12 @@ public class UserProfile {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+/*    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }*/
 }

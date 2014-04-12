@@ -1,12 +1,12 @@
 package com.NDWS.common.controller;
 
+import com.NDWS.BeanConfiguration;
 import com.NDWS.common.beans.User;
 import com.NDWS.common.beans.UserProfile;
-import com.NDWS.persistence.HibernateUtil;
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.exception.ConstraintViolationException;
+import com.NDWS.common.repositories.UserProfileRepository;
+import com.NDWS.common.repositories.UserRepository;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,47 +29,66 @@ import javax.validation.Valid;
 public class ProfileController {
     @RequestMapping(value="/profile", method = RequestMethod.GET)
     public ModelAndView profileLanding(ModelMap model) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
 
         org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername();
 
-        model.addAttribute("error", "Invalid Login!");
-        return new ModelAndView("profile", "userProfile", new UserProfile());
+        UserProfile returnedUserProfile = null;
+        User ndwsUser = null;
+        try{
+            AbstractApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+            UserRepository repository = context.getBean(UserRepository.class);
+            ndwsUser = repository.findByUsername(name);
+            if(ndwsUser == null){
+                ndwsUser = new User();
+            }
+
+            UserProfileRepository userProfileRepository = context.getBean(UserProfileRepository.class);
+            UserProfile temp = userProfileRepository.findOne(ndwsUser.getId());
+            if(temp != null){
+                returnedUserProfile = temp;
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        if(returnedUserProfile == null){
+            returnedUserProfile = new UserProfile();
+        }
+
+        //model.addAttribute("error", "Invalid Login!");
+        return new ModelAndView("profile", "userProfile", returnedUserProfile);
 
     }
 
     @RequestMapping(value = "/addOrUpdateUserProfile", method = RequestMethod.POST)
-    public String addOrUpdateUserProfile(@Valid @ModelAttribute("userProfile")UserProfile userProfile, BindingResult errors, ModelMap model) {
+    public ModelAndView addOrUpdateUserProfile(@Valid @ModelAttribute("userProfile")UserProfile userProfile, BindingResult errors, ModelMap model) {
         if(errors.hasErrors()){
-            return "login";
+            return new ModelAndView("login");
         }else{
-            Session session = null;
+            org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            String name = user.getUsername();
+
+            UserProfile returnedUserProfile = null;
+            User ndwsUser = null;
             try{
-                session = HibernateUtil.getSessionFactory().getCurrentSession();
-                session.beginTransaction();
-                session.save(userProfile);
-                session.getTransaction().commit();
-            }catch(ConstraintViolationException cve){
-                //no need to print stacktrace, create error;
-                return "profile";
+                AbstractApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+                UserRepository repository = context.getBean(UserRepository.class);
+                ndwsUser = repository.findByUsername(name);
+                if(ndwsUser == null){
+                    ndwsUser = new User();
+                }
+
+                userProfile.setNdwsUserId(ndwsUser.getId());
+
+                UserProfileRepository userProfileRepository = context.getBean(UserProfileRepository.class);
+                userProfileRepository.save(userProfile);
             }catch(Exception e){
                 e.printStackTrace();
-                //something bad happened.
-                errors.rejectValue("firstName", "error.firstName", "An error occured while saving your user profile!");
-                if(session != null){
-                    session.getTransaction().rollback();
-                }
-                return "profile";
-            }finally{
-                if(session != null){
-                    //session.close();
-                }
+                return new ModelAndView("profile", "userProfile", userProfile);
             }
         }
-        return "landing";
+        return new ModelAndView("landing");
     }
-
 }
 
 
