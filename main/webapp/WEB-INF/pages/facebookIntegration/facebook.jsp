@@ -1,6 +1,51 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '536303036482123',
+            status     : true,
+            xfbml      : true
+        });
+        FB.login(function(response) {
+                if (response.authResponse) {
+                    FB.api(
+                            "/me/albums",
+                            function (albumResponse) {
+                                if (albumResponse && albumResponse.error != undefined) {
+                                    /* handle the result */
+                                    alert('error');
+                                }else{
+                                    alert(albumResponse);
+                                    //var jsonObject = eval('(' + response + ')');
+                                    //alert(jsonObject);
+                                    //var data = jsonObject.data;
+                                    //alert(data);
+                                }
+                            }
+                    );
+
+                    // The person logged into your app
+                } else {
+                    // The person cancelled the login dialog
+                }
+            },
+            {scope: 'user_photos'}
+        );
+
+
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 <div class="content" style="padding-top: 10px; padding-bottom: 10px;">
     <div class="horizontalAlignContent">
         <div class="userProfileInformation">
