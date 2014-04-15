@@ -21,12 +21,12 @@
             <jdbc-user-service data-source-ref="dataSource"
 
                                users-by-username-query="
-                        select username,password,enabled
-                        from ndws_user where USERNAME=?"
+                        select email_address,password,enabled
+                        from ndws_user where email_address=?"
 
                                authorities-by-username-query="
-                        select u.username, ur.authority from ndws_user u, ndws_user_roles ur
-                        where u.id = ur.ndws_user_id and u.username =?  "
+                        select u.email_address, ur.authority from ndws_user u, ndws_user_roles ur
+                        where u.id = ur.ndws_user_id and u.email_address =?  "
 
                     />
         </authentication-provider>

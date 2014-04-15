@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserProfileRepository extends CrudRepository<UserProfile, Integer>{
-    public User findByNdwsUserId(int ndwsUserId);
-    public User getByNdwsUserId(int ndwsUserId);
+    public UserProfile findByNdwsUserId(int ndwsUserId);
+    public UserProfile getByNdwsUserId(int ndwsUserId);
+    public UserProfile getByUsername(String username);
+    public UserProfile getByUsernameAndNdwsUserIdNot(String username, int ndwsUserId);
 }

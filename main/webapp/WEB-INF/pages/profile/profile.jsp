@@ -15,12 +15,18 @@
                     <fieldset>
                         <label for="lastName">Last Name<span>*</span></label><br>
                         <form:errors path="lastName" cssClass="errorTheme" />
-                        <form:input path="lastName" id="firstName" />
+                        <form:input path="lastName" id="lastName" />
+                    </fieldset>
+                    <fieldset>
+                        <label for="username">Username<span>*</span></label><br>
+                        <form:errors path="username" cssClass="errorTheme" />
+                        <form:input path="username" id="username" />
                     </fieldset>
                     <input type="submit" id="signup" value="Save" />
                 </fieldset>
             </form:form>
         </div>
+        <a href="/facebookIntegration">Integrate With Facebook</a>
     </div>
     <%--    <script type="text/javascript">
             $(document).ready(function(){

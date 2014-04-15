@@ -8,9 +8,9 @@
                 <span class="signupBlue">Signup:</span>
                 <fieldset id="signupbody">
                     <fieldset>
-                        <label for="signupemail">Username<span>*</span></label><br>
-                        <form:errors path="username" cssClass="errorTheme" />
-                        <form:input path="username" id="signupemail" />
+                        <label for="signupemail">Email Address<span>*</span></label><br>
+                        <form:errors path="emailAddress" cssClass="errorTheme" />
+                        <form:input path="emailAddress" id="signupemail" />
                     </fieldset>
                     <fieldset>
                         <label for="signuppassword">Choose Password <span>*</span></label><br>

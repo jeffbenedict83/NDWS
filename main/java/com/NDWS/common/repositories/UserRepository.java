@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserRepository extends CrudRepository<User, Integer>{
-    public User findByUsername(String username);
-    public User getByUsername(String username);
+    public User findByEmailAddress(String emailAddress);
+    public User getByEmailAddress(String emailAddress);
 }

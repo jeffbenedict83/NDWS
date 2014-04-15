@@ -51,11 +51,6 @@ public class UserController {
         }else{
             AbstractApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
             UserRepository repository = context.getBean(UserRepository.class);
-            User temp = repository.getByUsername(user.getUsername());
-            if(temp != null){
-                errors.rejectValue("username", "error.username", "Duplicate Username");
-                return new ModelAndView("login");
-            }
 
             try{
                 String preShaPassword = user.getPassword();
@@ -63,7 +58,7 @@ public class UserController {
                 user.setConfirmPassword(sha(user.getConfirmPassword()));
                 repository.save(user);
 
-                user = repository.findByUsername(user.getUsername());
+                user = repository.getByEmailAddress(user.getEmailAddress());
 
                 UserRole userRole = new UserRole();
                 userRole.setNdwsUserId(user.getId());
@@ -75,7 +70,7 @@ public class UserController {
                 ArrayList<GrantedAuthority> grantedAuthorityArrayList = new ArrayList<GrantedAuthority>();
                 grantedAuthorityArrayList.add(grantedAuthority);
 
-                UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getUsername (),preShaPassword,grantedAuthorityArrayList);
+                UserDetails userDetails = new org.springframework.security.core.userdetails.User(user.getEmailAddress(),preShaPassword,grantedAuthorityArrayList);
 
                 Authentication auth = new UsernamePasswordAuthenticationToken(userDetails,preShaPassword,grantedAuthorityArrayList);
                 SecurityContextHolder.getContext().setAuthentication(auth);

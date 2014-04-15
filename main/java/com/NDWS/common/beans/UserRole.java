@@ -1,12 +1,9 @@
 package com.NDWS.common.beans;
 
-import com.NDWS.common.Constraints.Username;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 /**
  * Created with IntelliJ IDEA.

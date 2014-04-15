@@ -1,7 +1,8 @@
 package com.NDWS.common.beans;
 
+import com.NDWS.common.Constraints.UsernameUniqueConstraint;
+
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -26,9 +27,15 @@ public class UserProfile {
     @Column(name="LAST_NAME",nullable = false)
     private String lastName;
 
-    public UserProfile(String firstName, String lastName){
+    @Size(min=5, max=50)
+    @Column(name="USERNAME", nullable = false)
+    @UsernameUniqueConstraint
+    private String username;
+
+    public UserProfile(String firstName, String lastName, String username){
         this.firstName = firstName;
         this.lastName = lastName;
+        this.username = username;
     }
 
 /*    @OneToOne(fetch = FetchType.EAGER)
@@ -63,7 +70,15 @@ public class UserProfile {
         this.lastName = lastName;
     }
 
-/*    public User getUser() {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    /*    public User getUser() {
         return user;
     }
 

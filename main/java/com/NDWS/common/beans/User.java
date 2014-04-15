@@ -1,7 +1,9 @@
 package com.NDWS.common.beans;
 
+import com.NDWS.common.Constraints.EmailUniqueConstraint;
 import com.NDWS.common.Constraints.FieldMatch;
-import com.NDWS.common.Constraints.Username;
+import org.hibernate.validator.constraints.Email;
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -22,10 +24,11 @@ public class User {
     @Column(name="ID")
     private int id;
 
-    @Column(name="USERNAME",nullable = false)
+    @Column(name="EMAIL_ADDRESS",nullable = false)
     @Size(min=5, max=50)
-    @Username
-    private String username;
+    @Email
+    @EmailUniqueConstraint
+    private String emailAddress;
 
     @Column(name="PASSWORD",nullable = false)
     @Size(min=5, max=50)
@@ -41,8 +44,8 @@ public class User {
 /*    @OneToOne(fetch =  FetchType.LAZY, mappedBy="user")
     private UserProfile userProfile;*/
 
-    public User(String username, String password, String confirmPassword){
-        this.username = username;
+    public User(String emailAddress, String password, String confirmPassword){
+        this.emailAddress = emailAddress;
         this.password = password;
         this.confirmPassword = confirmPassword;
     }
@@ -59,12 +62,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getEmailAddress() {
+        return emailAddress;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
     }
 
     public String getPassword() {

@@ -35,11 +35,5 @@ public class MainController {
         return "mainLanding";
 
     }*/
-
-    @RequestMapping(value="/facebookIntegration", method = RequestMethod.GET)
-    public String facebookIntegrationLanding(ModelMap model) {
-        return "facebookIntegration";
-
-    }
 }
 

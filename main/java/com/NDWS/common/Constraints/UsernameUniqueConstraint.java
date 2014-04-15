@@ -1,7 +1,5 @@
 package com.NDWS.common.Constraints;
 
-import com.NDWS.common.Validators.UsernamePattern;
-
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
 
@@ -14,9 +12,9 @@ import javax.validation.Payload;
 
 @Target( { METHOD, FIELD, ANNOTATION_TYPE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = UsernamePattern.class)
+@Constraint(validatedBy = com.NDWS.common.Validators.UsernameUniqueValidator.class)
 @Documented
-public @interface Username {
+public @interface UsernameUniqueConstraint {
 
     String message() default "Username is not unique";
 

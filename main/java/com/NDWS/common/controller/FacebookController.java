@@ -2,7 +2,9 @@ package com.NDWS.common.controller;
 
 import com.NDWS.BeanConfiguration;
 import com.NDWS.common.beans.User;
+import com.NDWS.common.beans.UserFacebook;
 import com.NDWS.common.beans.UserProfile;
+import com.NDWS.common.repositories.UserFacebookRepository;
 import com.NDWS.common.repositories.UserProfileRepository;
 import com.NDWS.common.repositories.UserRepository;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -26,14 +28,13 @@ import javax.validation.Valid;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-public class ProfileController {
-    @RequestMapping(value="/profile", method = RequestMethod.GET)
-    public ModelAndView profileLanding(ModelMap model) {
-
+public class FacebookController {
+    @RequestMapping(value="/facebookIntegration", method = RequestMethod.GET)
+    public ModelAndView facebookIntegrationLanding(ModelMap model) {
         org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String name = user.getUsername();
 
-        UserProfile returnedUserProfile = null;
+        UserFacebook returnedUserFacebook = null;
         User ndwsUser = null;
         try{
             AbstractApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
@@ -43,29 +44,30 @@ public class ProfileController {
                 ndwsUser = new User();
             }
 
-            UserProfileRepository userProfileRepository = context.getBean(UserProfileRepository.class);
-            UserProfile temp = userProfileRepository.findOne(ndwsUser.getId());
+            UserFacebookRepository userFacebookRepository = context.getBean(UserFacebookRepository.class);
+            UserFacebook temp = userFacebookRepository.findByNdwsUserId(ndwsUser.getId());
             if(temp != null){
-                returnedUserProfile = temp;
+                returnedUserFacebook = temp;
             }
         }catch(Exception e){
             e.printStackTrace();
         }
-        if(returnedUserProfile == null){
-            returnedUserProfile = new UserProfile();
+        if(returnedUserFacebook == null){
+            returnedUserFacebook = new UserFacebook();
         }
-        return new ModelAndView("profile", "userProfile", returnedUserProfile);
+        return new ModelAndView("facebookIntegration", "userFacebook", returnedUserFacebook);
+
     }
 
-    @RequestMapping(value = "/addOrUpdateUserProfile", method = RequestMethod.POST)
-    public ModelAndView addOrUpdateUserProfile(@Valid @ModelAttribute("userProfile")UserProfile userProfile, BindingResult errors, ModelMap model) {
+    @RequestMapping(value="/addOrUpdateFacebookAccount", method = RequestMethod.POST)
+    public ModelAndView profileLanding(@Valid @ModelAttribute("userFacebook")UserFacebook userFacebook, BindingResult errors, ModelMap model) {
         if(errors.hasErrors()){
-            return new ModelAndView("profile", "userProfile", userProfile);
+            return new ModelAndView("facebookIntegration", "userFacebook", userFacebook);
         }else{
             org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             String name = user.getUsername();
 
-            UserProfile returnedUserProfile = null;
+            UserProfile returnedUserFacebook = null;
             User ndwsUser = null;
             try{
                 AbstractApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
@@ -75,13 +77,14 @@ public class ProfileController {
                     ndwsUser = new User();
                 }
 
-                userProfile.setNdwsUserId(ndwsUser.getId());
+                userFacebook.setNdwsUserId(ndwsUser.getId());
 
-                UserProfileRepository userProfileRepository = context.getBean(UserProfileRepository.class);
-                userProfileRepository.save(userProfile);
+                UserFacebookRepository userFacebookRepository = context.getBean(UserFacebookRepository.class);
+                userFacebook.setFacebookPassword(UserController.sha(userFacebook.getFacebookPassword()));
+                userFacebookRepository.save(userFacebook);
             }catch(Exception e){
                 e.printStackTrace();
-                return new ModelAndView("profile", "userProfile", userProfile);
+                return new ModelAndView("facebookIntegration", "userFacebook", userFacebook);
             }
         }
         return new ModelAndView("landing");

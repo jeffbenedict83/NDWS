@@ -15,9 +15,9 @@
                 <form:form id="signupForm" modelAttribute="user" action="/addUser" method="POST">
                     <fieldset id="signupbody">
                         <fieldset>
-                            <label for="signupemail">Username<span>*</span></label><br>
-                            <form:errors path="username" cssClass="errorTheme" />
-                            <form:input path="username" id="signupemail" />
+                            <label for="signupemail">Email Address<span>*</span></label><br>
+                            <form:errors path="emailAddress" cssClass="errorTheme" />
+                            <form:input path="emailAddress" id="signupemail" />
                         </fieldset>
                         <fieldset>
                             <label for="signuppassword">Choose Password <span>*</span></label><br>
@@ -41,7 +41,7 @@
                 <form id="loginForm" action="<c:url value='/j_spring_security_check' />" method='POST'>
                     <fieldset id="body">
                         <fieldset>
-                            <label for="j_username">Username</label>
+                            <label for="j_username">Email Address</label>
                             <input type="text" name="j_username" id="j_username" />
                         </fieldset>
                         <fieldset>
