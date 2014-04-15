@@ -25,7 +25,7 @@ public class UserFacebook {
 
     @Column(name="NDWS_USER_FACEBOOK_USERNAME",nullable = false)
     @Size(min=5, max=50)
-    @FacebookUsernameUniqueConstraint
+    @FacebookUsernameUniqueConstrainttest
     String facebookUsername;
 
     @Column(name="NDWS_USER_FACEBOOK_PASSWORD",nullable = false)
