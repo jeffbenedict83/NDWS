@@ -22,18 +22,18 @@
         <put-attribute name="body" value="/WEB-INF/pages/noSecurity/mainLanding.jsp" />
     </definition>
     <definition name="landing" extends="base.definition">
-        <put-attribute name="title" value="Formerly LDS Singles Landing" />
+        <put-attribute name="title" value="Formerly LDS Singles" />
         <put-attribute name="headerRight" value="/WEB-INF/pages/template/secureHeaderRight.jsp" />
         <put-attribute name="body" value="/WEB-INF/pages/main/landing.jsp" />
     </definition>
     <definition name="profile" extends="base.definition">
-        <put-attribute name="title" value="Profile" />
+        <put-attribute name="title" value="Formerly LDS Singles" />
         <put-attribute name="headerRight" value="/WEB-INF/pages/template/secureHeaderRight.jsp" />
         <put-attribute name="body" value="/WEB-INF/pages/profile/profile.jsp" />
     </definition>
-    <definition name="facebookIntegration" extends="base.definition">
-        <put-attribute name="title" value="Facebook Integration" />
+    <definition name="chooseFacebookPhotos" extends="base.definition">
+        <put-attribute name="title" value="Formerly LDS Singles" />
         <put-attribute name="headerRight" value="/WEB-INF/pages/template/secureHeaderRight.jsp" />
-        <put-attribute name="body" value="/WEB-INF/pages/facebookIntegration/facebook.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/facebookProfilePhoto/chooseFacebookProfilePhoto.jsp" />
     </definition>
 </tiles-definitions>
