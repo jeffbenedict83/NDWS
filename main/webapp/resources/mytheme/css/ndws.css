@@ -38,8 +38,30 @@
     *display: inline;
 }
 
+.inlineBlock{
+    display: inline-block;
+    *display: inline;
+}
+
 .horizontalAlignContent{
     margin-left:auto;
     margin-right:auto;
     width: 639px;
+}
+
+.fbppTotalContainer{
+    margin-left:auto;
+    margin-right:auto;
+    width: 800px;
+}
+
+.fbppContainer {
+    width: 265px;
+    height: 265px;
+}
+
+/* resize images */
+.fbppContainer img {
+    width: 100%;
+    height: auto;
 }

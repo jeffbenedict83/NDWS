@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="content" style="padding-top: 10px; padding-bottom: 10px;">
-    <div class="horizontalAlignContent">
+    <div class="fbppTotalContainer">
         <div id="profilePhotos"></div>
     </div>
 </div>
@@ -20,7 +20,7 @@
                             json.userFacebookProfilePhotos.length > 0){
                         innerHtml = "";
                         for(var i = 0; i < json.userFacebookProfilePhotos.length; i++){
-                            innerHtml += "<img src='"+json.userFacebookProfilePhotos[i].facebookProfilePhotoPath+"' id='"+json.userFacebookProfilePhotos[i].id+"' />";
+                            innerHtml += "<div class='fbppContainer inlineBlock'><img src='"+json.userFacebookProfilePhotos[i].facebookProfilePhotoPath+"' id='"+json.userFacebookProfilePhotos[i].id+"' /></div>";
                         }
                         $('#profilePhotos').html(innerHtml);
                     }else{
