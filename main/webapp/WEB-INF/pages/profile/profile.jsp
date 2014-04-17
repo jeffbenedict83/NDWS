@@ -3,32 +3,86 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="content" style="padding-top: 10px; padding-bottom: 10px;">
     <div class="horizontalAlignContent">
-        <div class="userProfileInformation">
-            <form:form id="signupForm" modelAttribute="userProfile" action="/addOrUpdateUserProfile" method="POST">
-                <span class="signupBlue">Profile Information:</span>
-                <fieldset id="signupbody">
-                    <fieldset>
-                        <label for="firstName">First Name<span>*</span></label><br>
-                        <form:errors path="firstName" cssClass="errorTheme" />
-                        <form:input path="firstName" id="firstName" />
+        <div class="signupFormLogin">
+            <div class="userProfileInformation">
+                <form:form id="signupForm" modelAttribute="userProfile" action="/addOrUpdateUserProfile" method="POST">
+                    <span class="signupBlue">Profile Information:</span>
+                    <fieldset id="signupbody">
+                        <fieldset>
+                            <label for="firstName">First Name<span>*</span></label><br>
+                            <form:errors path="firstName" cssClass="errorTheme" />
+                            <form:input path="firstName" id="firstName" />
+                        </fieldset>
+                        <fieldset>
+                            <label for="lastName">Last Name<span>*</span></label><br>
+                            <form:errors path="lastName" cssClass="errorTheme" />
+                            <form:input path="lastName" id="lastName" />
+                        </fieldset>
+                        <fieldset>
+                            <label for="username">Username<span>*</span></label><br>
+                            <form:errors path="username" cssClass="errorTheme" />
+                            <form:input path="username" id="username" />
+                        </fieldset>
+                        <input type="submit" id="signup" value="Save" />
                     </fieldset>
-                    <fieldset>
-                        <label for="lastName">Last Name<span>*</span></label><br>
-                        <form:errors path="lastName" cssClass="errorTheme" />
-                        <form:input path="lastName" id="lastName" />
-                    </fieldset>
-                    <fieldset>
-                        <label for="username">Username<span>*</span></label><br>
-                        <form:errors path="username" cssClass="errorTheme" />
-                        <form:input path="username" id="username" />
-                    </fieldset>
-                    <input type="submit" id="signup" value="Save" />
-                </fieldset>
-            </form:form>
+                </form:form>
+            </div>
         </div>
-        <a href="javascript:testFacebook()">Integrate With Facebook</a>
+        <div class="loginSpacer"></div>
+        <div class="loginFormLogin">
+            <span class="loginPink">Profile Photos:</span>
+            <c:choose>
+                <c:when test="${hasFacebookProfilePhotos eq '1'}">
+                    <span class="normalText">Click the button below to view your Facebook profile pictures</span>
+                    <input id="viewFacebookProfilePhotos" type="button" class="blueButton" value="View my Facebook profile pictures" />
+                    <div class="verticalSpacer"></div>
+                    <span class="normalText">Click the button below re-pull your Facebook profile pictures</span>
+                    <input id="rePullFacebookProfilePhotos" type="button" class="pinkButton" value="Re-pull Facebook Profile Pictures" />
+                </c:when>
+                <c:otherwise>
+                    <span class="normalText">Click the button below pull your Facebook profile pictures</span>
+                    <input id="pullFacebookProfilePhotos" type="button" class="pinkButton" value="Pull Facebook Profile Pictures" />
+                </c:otherwise>
+            </c:choose>
+            </div>
+        </div>
         <div id="fb-root"></div>
         <script>
+            $(function() {
+                $( "#pullFacebookProfilePhotos" ).click(function() {
+                    integrateWithFacebookAndPullPhotos();
+                });
+
+                $( "#rePullFacebookProfilePhotos" ).click(function() {
+                    verifyUserWantsToRepullFacebookProfilePictures();
+                });
+
+                $( "#viewFacebookProfilePhotos" ).click(function() {
+                    window.location = "/chooseFacebookPhotos";
+                });
+            });
+
+            function verifyUserWantsToRepullFacebookProfilePictures(){
+                $('<div></div>').appendTo('body')
+                        .html('<div><h6>Do you want to re-pull your Facebook profile pictures?</h6></div>')
+                        .dialog({
+                            modal: true, title: 'message', zIndex: 10000, autoOpen: true,
+                            width: 'auto', resizable: false,
+                            buttons: {
+                                Yes: function () {
+                                    integrateWithFacebookAndPullPhotos();
+                                    $(this).dialog("close");
+                                },
+                                No: function () {
+                                    $(this).dialog("close");
+                                }
+                            },
+                            close: function (event, ui) {
+                                $(this).remove();
+                            }
+                        });
+            }
+
             window.fbAsyncInit = function() {
                 FB.init({
                     appId      : '536303036482123',
@@ -45,7 +99,7 @@
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));
 
-            function testFacebook(){
+            function integrateWithFacebookAndPullPhotos(){
                 FB.login(function(response) {
                             if (response.authResponse) {
                                 FB.api(

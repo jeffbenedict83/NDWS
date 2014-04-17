@@ -28,4 +28,8 @@ public interface UserFacebookProfilePhotoRepository extends CrudRepository<UserF
 
     @Query("select ufpp FROM UserFacebookProfilePhoto ufpp WHERE ufpp.ndwsUserId=:ndwsUserId")
     public ArrayList<UserFacebookProfilePhoto> findAllFacebookProfilePhotosForUser(@Param("ndwsUserId") int ndwsUserId);
+
+
+    public UserFacebookProfilePhoto findById(int id);
+
 }

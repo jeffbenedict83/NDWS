@@ -2,7 +2,9 @@ package com.NDWS.common.controller;
 
 import com.NDWS.BeanConfiguration;
 import com.NDWS.common.beans.User;
+import com.NDWS.common.beans.UserFacebookProfilePhoto;
 import com.NDWS.common.beans.UserProfile;
+import com.NDWS.common.repositories.UserFacebookProfilePhotoRepository;
 import com.NDWS.common.repositories.UserProfileRepository;
 import com.NDWS.common.repositories.UserRepository;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA.
@@ -48,6 +51,15 @@ public class ProfileController {
             if(temp != null){
                 returnedUserProfile = temp;
             }
+
+            UserFacebookProfilePhotoRepository userFacebookProfileRepository = context.getBean(UserFacebookProfilePhotoRepository.class);
+            ArrayList<UserFacebookProfilePhoto> userFacebookProfilePhotos = userFacebookProfileRepository.findAllFacebookProfilePhotosForUser(ndwsUser.getId());
+            if(userFacebookProfilePhotos != null && userFacebookProfilePhotos.size() > 0){
+                model.addAttribute("hasFacebookProfilePhotos", "1");
+            }else{
+                model.addAttribute("hasFacebookProfilePhotos", "0");
+            }
+
         }catch(Exception e){
             e.printStackTrace();
         }

@@ -49,6 +49,14 @@
     width: 639px;
 }
 
+.hideContainer{
+    visibility: hidden;
+}
+
+.showContainer{
+    visibility: visible;
+}
+
 .fbppTotalContainer{
     margin-left:auto;
     margin-right:auto;
@@ -56,12 +64,107 @@
 }
 
 .fbppContainer {
-    width: 265px;
-    height: 265px;
+    width: 235px;
+    height: 275px;
+    background-color: #53CBE9;
+    text-align:center;
+    vertical-align: top;
+    border: black solid 1px;
+    padding:5px;
+    margin:5px;
+}
+
+.photoControls{
+    background-color: #E95393;
+    height:35px;
+    padding-left:5px;
+    text-align:center;
+    vertical-align: middle;
+    margin-top:5px;
 }
 
 /* resize images */
-.fbppContainer img {
+.fbppImageHeightGreaterThanWidth {
+    width: auto;
+    height: 235px;
+}
+
+.fbppImageHeightLessThanWidth {
+    height: 235px;
+    width: auto;
+}
+
+.pinkButton {
+    color: #fff;
+    font-size: 0.875em;
+    font-weight: normal;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    background:#F36EA7;
+    display: inline-block;
     width: 100%;
-    height: auto;
+    cursor:pointer;
+    margin: 1em 0 0 0;
+    border: none;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    border-radius: 0.15em;
+    -webkit-border-radius: 0.15em;
+    -moz-border-radius: 0.15em;
+    -o-border-radius: 0.15em;
+    font-family: 'open_sansregular';
+}
+
+.pinkButton:hover{
+    background-color:#EE639F;
+}
+
+.blueButton{
+    color: #fff;
+    font-size: 0.875em;
+    font-weight: normal;
+    padding: 10px 15px;
+    text-transform: uppercase;
+    background:#53CBE9;
+    display: inline-block;
+    width: 100%;
+    cursor:pointer;
+    margin: 1em 0 0 0;
+    border: none;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    border-radius: 0.15em;
+    -webkit-border-radius: 0.15em;
+    -moz-border-radius: 0.15em;
+    -o-border-radius: 0.15em;
+    font-family: 'open_sansregular';
+}
+
+.blueButton:hover{
+    background-color:#43C5E6;
+}
+
+.normalText{
+    color: #777777;
+    display: block;
+    font-size: 0.875em;
+    font-weight: normal;
+    line-height: 1.5em;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.verticalSpacer{
+    height:15px;
+}
+
+.buttonMaxTwoHundred{
+    width:200px;
+    margin-left:5px;
 }

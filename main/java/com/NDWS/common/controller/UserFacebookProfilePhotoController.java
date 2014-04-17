@@ -32,6 +32,19 @@ import java.util.HashMap;
 @Controller
 public class UserFacebookProfilePhotoController {
 
+    @RequestMapping(value="/updatePhotoVisibility", method = RequestMethod.POST)
+    public @ResponseBody
+    String updatePhotoVisibility(@RequestParam("photoId") String photoId, @RequestParam("visibility") String visibility){
+
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+        UserFacebookProfilePhotoRepository userFacebookProfileRepository = context.getBean(UserFacebookProfilePhotoRepository.class);
+        UserFacebookProfilePhoto userFacebookProfilePhoto = userFacebookProfileRepository.findById(Integer.parseInt(photoId));
+        userFacebookProfilePhoto.setVisibility(Integer.parseInt(visibility));
+        userFacebookProfileRepository.save(userFacebookProfilePhoto);
+
+        return "success";
+    }
+
     @RequestMapping(value="/getSavedFacebookProfilePhotos", method = RequestMethod.GET)
     public @ResponseBody
     String getSavedFacebookProfilePhotos() {
@@ -62,7 +75,8 @@ public class UserFacebookProfilePhotoController {
                 retVal += "{";
                     retVal += "\"id\":\""+ufpp.getId()+"\",";
                     retVal += "\"ndwsUserId\":\""+ufpp.getNdwsUserId()+"\",";
-                    retVal += "\"facebookProfilePhotoPath\":\""+ufpp.getFacebookProfilePhotoPath()+"\"";
+                    retVal += "\"facebookProfilePhotoPath\":\""+ufpp.getFacebookProfilePhotoPath()+"\",";
+                    retVal += "\"visibility\":\""+ufpp.getVisibility()+"\"";
                 retVal += "}";
             }
             retVal += "]}";

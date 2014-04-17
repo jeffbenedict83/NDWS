@@ -31,9 +31,13 @@ public class UserFacebookProfilePhoto {
     @Size(min=5, max=200)
     private String facebookProfilePhotoPath;
 
-    public UserFacebookProfilePhoto(int ndwsUserId, String facebookProfilePhotoPath){
+    @Column(name="visibility", nullable = false)
+    private int visibility;
+
+    public UserFacebookProfilePhoto(int ndwsUserId, String facebookProfilePhotoPath, int visibility){
         this.ndwsUserId = ndwsUserId;
         this.facebookProfilePhotoPath = facebookProfilePhotoPath;
+        this.visibility = visibility;
     }
 
     public UserFacebookProfilePhoto(){
@@ -62,5 +66,13 @@ public class UserFacebookProfilePhoto {
 
     public void setFacebookProfilePhotoPath(String facebookProfilePhotoPath) {
         this.facebookProfilePhotoPath = facebookProfilePhotoPath;
+    }
+
+    public int getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(int visibility) {
+        this.visibility = visibility;
     }
 }
