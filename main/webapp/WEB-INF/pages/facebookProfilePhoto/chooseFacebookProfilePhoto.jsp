@@ -4,49 +4,63 @@
 <div class="content" style="padding-top: 10px; padding-bottom: 10px;">
     <div class="fbppTotalContainer">
         <div class="buttonMaxTwoHundred"><input id="backToProfile" type="button" class="blueButton" value="Back to profile" /></div>
-        <div id="profilePhotos"></div>
+        <div id="profilePhotosEnabled"></div>
+        <div id="profilePhotosDisabled"></div>
     </div>
 </div>
 <script type="text/javascript">
     $(function() {
-        $( "#backToProfile" ).click(function() {
-            window.location = "/profile";
-        });
+    $( "#backToProfile" ).click(function() {
+    window.location = "/profile";
+    });
 
         $.ajax({
             type: "GET",
             url: "/getSavedFacebookProfilePhotos",
             success : function(response) {
                 if(response != null && response != undefined){
-                    var innerHtml = "Error loading your profile pictures";
+                    var innerHtmlEnabled = "<span class=\"headerTextEnabledProfilePictures\">These photos will be visible:</span>";
+                    var innerHtmlDisabled = "<span class=\"headerTextDisabledProfilePictures\">These photos will NOT be visible:</span>";
                     var json = JSON.parse(response);
                     if(json != null && json != undefined && json.userFacebookProfilePhotos != null && json.userFacebookProfilePhotos != undefined &&
                             json.userFacebookProfilePhotos.length != null && json.userFacebookProfilePhotos.length != undefined &&
                             json.userFacebookProfilePhotos.length > 0){
-                        innerHtml = "";
+                        innerHtmlEnabled += "<ul id=\"sortable\" class=\"inlineBlock connectedSortable\">";
+                        innerHtmlDisabled += "<ul id=\"sortable2\" class=\"inlineBlock connectedSortable\">";
                         var totalCount = 0;
                         for(var i = 0; i < json.userFacebookProfilePhotos.length; i++){
-                            totalCount++;
-                            innerHtml += "<div class='fbppContainer inlineBlock hideContainer'><img src='"+json.userFacebookProfilePhotos[i].facebookProfilePhotoPath+"' id='"+json.userFacebookProfilePhotos[i].id+"' />";
-                                innerHtml += "<p class='photoControls'>";
-                                    innerHtml += '<span id="radio'+i+'" class="inlineBlock">';
-                                        var publicVisibilityText = '';
-                                        var privateVisibilityText = '';
-                                        if(json.userFacebookProfilePhotos[i].visibility == 0){
-                                            privateVisibilityText = "checked=\"checked\"";
-                                        }else{
-                                            publicVisibilityText = "checked=\"checked\"";
-                                        }
-                                        innerHtml += "<input type='radio' id='radio1"+i+"' name='radioName"+i+"' "+publicVisibilityText+" onclick='updatePhotoVisibility(\""+json.userFacebookProfilePhotos[i].id+"\", \"1\")'><label for='radio1"+i+"'>Public</label>";
-                                        innerHtml += "<input type='radio' id='radio2"+i+"' name='radioName"+i+"' "+privateVisibilityText+" onclick='updatePhotoVisibility(\""+json.userFacebookProfilePhotos[i].id+"\", \"0\")'><label for='radio2"+i+"'>Private</label>";
-                                    innerHtml += '</span>';
-                                innerHtml += "</p>";
-                            innerHtml += "</div>";
-                        }
-                        var profilePhotosDiv = $('#profilePhotos');
-                        profilePhotosDiv.html(innerHtml);
+                            var whichInnerHtml = "enabled";
+                            var tempInnerHtml = "";
 
-                        var images = profilePhotosDiv.find('img');
+                            tempInnerHtml += "<li class=\"sortableLI\" style=\"float:left\">";
+                            totalCount++;
+                            tempInnerHtml += "<div class='fbppContainer inlineBlock hideContainer'><img src='"+json.userFacebookProfilePhotos[i].facebookProfilePhotoPath+"' id='"+json.userFacebookProfilePhotos[i].id+"' />";
+                                tempInnerHtml += '<span id="radio'+i+'" class="inlineBlock">';
+                                if(json.userFacebookProfilePhotos[i].visibility == 0){
+                                    whichInnerHtml = "disabled";
+                                }else{
+                                    whichInnerHtml = "enabled";
+                                }
+                            tempInnerHtml += "</div>";
+                            tempInnerHtml += "</li>";
+                            if(whichInnerHtml == "enabled"){
+                                innerHtmlEnabled += tempInnerHtml;
+                            }else{
+                                innerHtmlDisabled += tempInnerHtml;
+                            }
+                        }
+                        innerHtmlEnabled += "</ul>";
+                        innerHtmlDisabled += "</ul>";
+                        var profilePhotosEnabledDiv = $('#profilePhotosEnabled');
+                        profilePhotosEnabledDiv.html(innerHtmlEnabled);
+                        var profilePhotosDisabledDiv = $('#profilePhotosDisabled');
+                        profilePhotosDisabledDiv.html(innerHtmlDisabled);
+
+                        $( "#sortable, #sortable2" ).sortable({
+                            connectWith: ".connectedSortable"
+                        }).disableSelection();
+
+                        var images = profilePhotosEnabledDiv.find('img');
                         if(images != null && images != undefined && images.length != null && images.length != undefined && images.length > 0){
                             for(var i = 0; i < images.length; i++){
                                 if(images[i].clientWidth >= images[i].clientHeight){
@@ -57,7 +71,18 @@
                             }
                         }
 
-                        var divsSurroundingImages = profilePhotosDiv.find('div');
+                        var images = profilePhotosDisabledDiv.find('img');
+                        if(images != null && images != undefined && images.length != null && images.length != undefined && images.length > 0){
+                            for(var i = 0; i < images.length; i++){
+                                if(images[i].clientWidth >= images[i].clientHeight){
+                                    images[i].className = 'fbppImageHeightGreaterThanWidth';
+                                }else if(images[i].clientWidth < images[i].clientHeight){
+                                    images[i].className = 'fbppImageHeightLessThanWidth';
+                                }
+                            }
+                        }
+
+                        var divsSurroundingImages = profilePhotosEnabledDiv.find('div');
                         if(divsSurroundingImages != null && divsSurroundingImages != undefined && divsSurroundingImages.length != null
                                 && divsSurroundingImages.length != undefined && divsSurroundingImages.length > 0){
                             for(var i = 0; i < divsSurroundingImages.length; i++){
@@ -65,8 +90,12 @@
                             }
                         }
 
-                        for(var i = 0; i < totalCount; i++){
-                            $( "#radio"+i ).buttonset();
+                        var divsSurroundingImages = profilePhotosDisabledDiv.find('div');
+                        if(divsSurroundingImages != null && divsSurroundingImages != undefined && divsSurroundingImages.length != null
+                                && divsSurroundingImages.length != undefined && divsSurroundingImages.length > 0){
+                            for(var i = 0; i < divsSurroundingImages.length; i++){
+                                divsSurroundingImages[i].className = 'fbppContainer inlineBlock showContainer';
+                            }
                         }
                     }else{
                         alert('error');
@@ -95,3 +124,29 @@
         });
     }
 </script>
+
+<%--
+<style>
+    #sortable { list-style-type: none; margin: 0; padding: 0; width: 450px; }
+    #sortable li { margin: 3px 3px 3px 0; padding: 1px; float: left; width: 100px; height: 90px; font-size: 4em; text-align: center; }
+</style>
+<script>
+    $(function() {
+        $( "#sortable" ).sortable();
+        $( "#sortable" ).disableSelection();
+    });
+</script>
+<ul id="sortable">
+    <li class="ui-state-default">1</li>
+    <li class="ui-state-default">2</li>
+    <li class="ui-state-default">3</li>
+    <li class="ui-state-default">4</li>
+    <li class="ui-state-default">5</li>
+    <li class="ui-state-default">6</li>
+    <li class="ui-state-default">7</li>
+    <li class="ui-state-default">8</li>
+    <li class="ui-state-default">9</li>
+    <li class="ui-state-default">10</li>
+    <li class="ui-state-default">11</li>
+    <li class="ui-state-default">12</li>
+</ul>--%>

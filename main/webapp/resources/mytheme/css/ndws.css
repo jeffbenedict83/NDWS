@@ -60,12 +60,12 @@
 .fbppTotalContainer{
     margin-left:auto;
     margin-right:auto;
-    width: 800px;
+    width: 815px;
 }
 
 .fbppContainer {
-    width: 235px;
-    height: 275px;
+    width: 150px;
+    height: 150px;
     background-color: #53CBE9;
     text-align:center;
     vertical-align: top;
@@ -86,11 +86,11 @@
 /* resize images */
 .fbppImageHeightGreaterThanWidth {
     width: auto;
-    height: 235px;
+    height: 150px;
 }
 
 .fbppImageHeightLessThanWidth {
-    height: 235px;
+    height: 150px;
     width: auto;
 }
 
@@ -167,4 +167,19 @@
 .buttonMaxTwoHundred{
     width:200px;
     margin-left:5px;
+}
+
+#sortable {
+    list-style-type: none; margin: 0; padding: 0; width: 815px;
+}
+.sortableLI { margin: 3px 3px 3px 0; padding: 5px; float: left; width: 150px; height: 150px; font-size: 4em; text-align: center; }
+
+.ui-button-text{
+    font-size:14px;
+    padding:5px;
+}
+
+.ui-buttonset{
+    padding-top: 5px;
+    width:100%;
 }
