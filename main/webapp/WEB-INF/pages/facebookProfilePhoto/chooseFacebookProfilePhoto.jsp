@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="content" style="padding-top: 10px; padding-bottom: 10px;">
     <div class="fbppTotalContainer">
-        <div class="buttonMaxTwoHundred"><input id="backToProfile" type="button" class="blueButton" value="Back to profile" /></div>
+        <div class="buttonMaxTwoHundred"><input id="backToProfile" type="button" class="blueButton" value="Save and Go Back" /></div>
         <div id="profilePhotosEnabled"></div>
         <div id="profilePhotosDisabled"></div>
     </div>
@@ -11,7 +11,8 @@
 <script type="text/javascript">
     $(function() {
     $( "#backToProfile" ).click(function() {
-    window.location = "/profile";
+        //window.location = "/profile";
+        updateOrdering();
     });
 
         $.ajax({
@@ -59,10 +60,10 @@
                         $( "#sortable, #sortable2" ).sortable({
                             connectWith: ".connectedSortable",
                             update: function(event, ui){
-                                var sortable = $("#sortable");
+                                /*var sortable = $("#sortable");
                                 var sortable2 = $("#sortable2");
                                 updateOrdering('1', sortable.sortable("toArray"));
-                                updateOrdering('0', sortable2.sortable("toArray"));
+                                updateOrdering('0', sortable2.sortable("toArray"));*/
 
                             }
                         }).disableSelection();
@@ -115,20 +116,36 @@
         });
     });
 
-    function updateOrdering(enabled, sortableArray){
+    function updateOrdering(){
+        var sortable = $("#sortable");
+        var sortable2 = $("#sortable2");
+        var enabledArray = sortable.sortable("toArray");
+        var disabledArray = sortable2.sortable("toArray");
+
         var finishedJSON = '';
         finishedJSON += "{";
-            finishedJSON += "\"enabled\":\""+enabled+"\",";
-                finishedJSON += "\"items\":[";
-                for(var i = 0; i < sortableArray.length; i++){
-                    finishedJSON += "{";
-                    finishedJSON += "\"id\":\""+sortableArray[i].substr(13)+"\"";
-                    finishedJSON += "}";
-                    if(i != sortableArray.length-1){
-                        finishedJSON += ",";
-                    }
+            finishedJSON += "\"enabledItems\":[";
+            for(var i = 0; i < enabledArray.length; i++){
+                finishedJSON += "{";
+                finishedJSON += "\"id\":\""+enabledArray[i].substr(13)+"\"";
+                finishedJSON += "}";
+                if(i != enabledArray.length-1){
+                    finishedJSON += ",";
                 }
-                finishedJSON += "]";
+            }
+            finishedJSON += "],";
+
+            finishedJSON += "\"disabledItems\":[";
+            for(var i = 0; i < disabledArray.length; i++){
+                finishedJSON += "{";
+                finishedJSON += "\"id\":\""+disabledArray[i].substr(13)+"\"";
+                finishedJSON += "}";
+                if(i != disabledArray.length-1){
+                    finishedJSON += ",";
+                }
+            }
+            finishedJSON += "]";
+
         finishedJSON += "}";
 
         $.ajax({
@@ -139,8 +156,7 @@
             contentType: "application/json",
             mimeType: 'application/json',
             success: function(response) {
-                /*alert("asdf");
-                alert(response);*/
+                window.location = "/profile";
             },
             error : function(e) {
                 alert('error saving photo visibility');

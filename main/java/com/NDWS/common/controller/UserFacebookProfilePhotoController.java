@@ -52,32 +52,36 @@ public class UserFacebookProfilePhotoController {
     @RequestMapping(value="/updatePhotoVisibilityJSON", method = RequestMethod.POST)
     public @ResponseBody
     String updatePhotoVisibilityJSON(@RequestBody String jsonString) {
-        AbstractApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
-        UserFacebookProfilePhotoRepository userFacebookProfileRepository = context.getBean(UserFacebookProfilePhotoRepository.class);
         JSONObject json = null;
         try{
             json = (JSONObject)new JSONParser().parse(jsonString);
             json = (JSONObject)new JSONParser().parse(json.get("finishedJSON").toString());
 
-            boolean enabled = "1".equals(json.get("enabled"));
+            JSONArray enabledItems = (JSONArray) json.get("enabledItems");
+            JSONArray disabledItems = (JSONArray) json.get("disabledItems");
 
-            JSONArray jsonArray = (JSONArray) json.get("items");
-
-            for(int i = 0; i < jsonArray.size(); i++){
-                JSONObject temp = (JSONObject) jsonArray.get(i);
-
-                int photoId = Integer.parseInt((String)temp.get("id"));
-                UserFacebookProfilePhoto userFacebookProfilePhoto = userFacebookProfileRepository.findById(photoId);
-                userFacebookProfilePhoto.setVisibility(enabled?1:0);
-                userFacebookProfilePhoto.setPhotoOrder(i);
-
-                userFacebookProfileRepository.save(userFacebookProfilePhoto);
-            }
+            updatePhotoVisibilityAndOrdering(enabledItems, true);
+            updatePhotoVisibilityAndOrdering(disabledItems, false);
         }catch(Exception e){
             e.printStackTrace();
         }
 
         return "{\"status\":\"SUCCESS\"}";
+    }
+
+    private static void updatePhotoVisibilityAndOrdering(JSONArray items, boolean enabled){
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+        UserFacebookProfilePhotoRepository userFacebookProfileRepository = context.getBean(UserFacebookProfilePhotoRepository.class);
+        for(int i = 0; i < items.size(); i++){
+            JSONObject temp = (JSONObject) items.get(i);
+
+            int photoId = Integer.parseInt((String)temp.get("id"));
+            UserFacebookProfilePhoto userFacebookProfilePhoto = userFacebookProfileRepository.findById(photoId);
+            userFacebookProfilePhoto.setVisibility(enabled?1:0);
+            userFacebookProfilePhoto.setPhotoOrder(i);
+
+            userFacebookProfileRepository.save(userFacebookProfilePhoto);
+        }
     }
 
     @RequestMapping(value="/getSavedFacebookProfilePhotos", method = RequestMethod.GET)
