@@ -32,7 +32,7 @@
                             var whichInnerHtml = "enabled";
                             var tempInnerHtml = "";
 
-                            tempInnerHtml += "<li class=\"sortableLI\" style=\"float:left\">";
+                            tempInnerHtml += '<li class=\"sortableLI\" style=\"float:left\" id=\"'+"sortableImage"+json.userFacebookProfilePhotos[i].id+'\">';
                             totalCount++;
                             tempInnerHtml += "<div class='fbppContainer inlineBlock hideContainer'><img src='"+json.userFacebookProfilePhotos[i].facebookProfilePhotoPath+"' id='"+json.userFacebookProfilePhotos[i].id+"' />";
                                 tempInnerHtml += '<span id="radio'+i+'" class="inlineBlock">';
@@ -57,7 +57,14 @@
                         profilePhotosDisabledDiv.html(innerHtmlDisabled);
 
                         $( "#sortable, #sortable2" ).sortable({
-                            connectWith: ".connectedSortable"
+                            connectWith: ".connectedSortable",
+                            update: function(event, ui){
+                                var sortable = $("#sortable");
+                                var sortable2 = $("#sortable2");
+                                updateOrdering('1', sortable.sortable("toArray"));
+                                updateOrdering('0', sortable2.sortable("toArray"));
+
+                            }
                         }).disableSelection();
 
                         var images = profilePhotosEnabledDiv.find('img');
@@ -108,9 +115,43 @@
         });
     });
 
+    function updateOrdering(enabled, sortableArray){
+        var finishedJSON = '';
+        finishedJSON += "{";
+            finishedJSON += "\"enabled\":\""+enabled+"\",";
+                finishedJSON += "\"items\":[";
+                for(var i = 0; i < sortableArray.length; i++){
+                    finishedJSON += "{";
+                    finishedJSON += "\"id\":\""+sortableArray[i].substr(13)+"\"";
+                    finishedJSON += "}";
+                    if(i != sortableArray.length-1){
+                        finishedJSON += ",";
+                    }
+                }
+                finishedJSON += "]";
+        finishedJSON += "}";
+
+        $.ajax({
+            url: "/updatePhotoVisibilityJSON",
+            type: "POST",
+            dataType: "json",
+            data: JSON.stringify({ finishedJSON: finishedJSON }),
+            contentType: "application/json",
+            mimeType: 'application/json',
+            success: function(response) {
+                /*alert("asdf");
+                alert(response);*/
+            },
+            error : function(e) {
+                alert('error saving photo visibility');
+            }
+        });
+
+    }
+
     function updatePhotoVisibility(id, visibility){
         $.ajax({
-            type: "POST",
+            type: "GET",
             url: "/updatePhotoVisibility",
             data : "photoId=" + id + "&visibility=" + visibility,
             success : function(response) {

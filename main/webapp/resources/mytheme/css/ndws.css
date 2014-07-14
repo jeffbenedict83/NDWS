@@ -170,7 +170,10 @@
 }
 
 #sortable {
-    list-style-type: none; margin: 0; padding: 0; width: 815px;
+    list-style-type: none; margin: 0; padding: 0; width: 815px; min-height: 120px;
+}
+#sortable2 {
+    list-style-type: none; margin: 0; padding: 0; width: 815px; min-height: 120px;
 }
 .sortableLI { margin: 3px 3px 3px 0; padding: 5px; float: left; width: 150px; height: 150px; font-size: 4em; text-align: center; }
 

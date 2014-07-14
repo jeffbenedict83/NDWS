@@ -34,10 +34,14 @@ public class UserFacebookProfilePhoto {
     @Column(name="visibility", nullable = false)
     private int visibility;
 
-    public UserFacebookProfilePhoto(int ndwsUserId, String facebookProfilePhotoPath, int visibility){
+    @Column(name="photo_order", nullable=false)
+    private int photoOrder;
+
+    public UserFacebookProfilePhoto(int ndwsUserId, String facebookProfilePhotoPath, int visibility, int photoOrder){
         this.ndwsUserId = ndwsUserId;
         this.facebookProfilePhotoPath = facebookProfilePhotoPath;
         this.visibility = visibility;
+        this.photoOrder = photoOrder;
     }
 
     public UserFacebookProfilePhoto(){
@@ -74,5 +78,13 @@ public class UserFacebookProfilePhoto {
 
     public void setVisibility(int visibility) {
         this.visibility = visibility;
+    }
+
+    public int getPhotoOrder() {
+        return photoOrder;
+    }
+
+    public void setPhotoOrder(int photoOrder) {
+        this.photoOrder = photoOrder;
     }
 }

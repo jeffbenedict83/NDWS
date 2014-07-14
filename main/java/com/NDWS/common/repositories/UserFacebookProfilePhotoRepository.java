@@ -26,7 +26,7 @@ public interface UserFacebookProfilePhotoRepository extends CrudRepository<UserF
     @Query("DELETE FROM UserFacebookProfilePhoto ufpp WHERE ufpp.ndwsUserId=:ndwsUserId")
     public void deleteAllFacebookProfilePhotosForUser(@Param("ndwsUserId") int ndwsUserId);
 
-    @Query("select ufpp FROM UserFacebookProfilePhoto ufpp WHERE ufpp.ndwsUserId=:ndwsUserId")
+    @Query("select ufpp FROM UserFacebookProfilePhoto ufpp WHERE ufpp.ndwsUserId=:ndwsUserId order by photoOrder")
     public ArrayList<UserFacebookProfilePhoto> findAllFacebookProfilePhotosForUser(@Param("ndwsUserId") int ndwsUserId);
 
 
