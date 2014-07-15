@@ -52,13 +52,7 @@ public class ProfileController {
                 returnedUserProfile = temp;
             }
 
-            UserFacebookProfilePhotoRepository userFacebookProfileRepository = context.getBean(UserFacebookProfilePhotoRepository.class);
-            ArrayList<UserFacebookProfilePhoto> userFacebookProfilePhotos = userFacebookProfileRepository.findAllFacebookProfilePhotosForUser(ndwsUser.getId());
-            if(userFacebookProfilePhotos != null && userFacebookProfilePhotos.size() > 0){
-                model.addAttribute("hasFacebookProfilePhotos", "1");
-            }else{
-                model.addAttribute("hasFacebookProfilePhotos", "0");
-            }
+            hasFacebookProfilePhotos(model, context, ndwsUser.getId());
 
         }catch(Exception e){
             e.printStackTrace();
@@ -67,6 +61,16 @@ public class ProfileController {
             returnedUserProfile = new UserProfile();
         }
         return new ModelAndView("profile", "userProfile", returnedUserProfile);
+    }
+
+    public static void hasFacebookProfilePhotos(ModelMap model, AbstractApplicationContext context, int ndwsId){
+        UserFacebookProfilePhotoRepository userFacebookProfileRepository = context.getBean(UserFacebookProfilePhotoRepository.class);
+        ArrayList<UserFacebookProfilePhoto> userFacebookProfilePhotos = userFacebookProfileRepository.findAllFacebookProfilePhotosForUser(ndwsId);
+        if(userFacebookProfilePhotos != null && userFacebookProfilePhotos.size() > 0){
+            model.addAttribute("hasFacebookProfilePhotos", "1");
+        }else{
+            model.addAttribute("hasFacebookProfilePhotos", "0");
+        }
     }
 
     @RequestMapping(value = "/addOrUpdateUserProfile", method = RequestMethod.POST)

@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="content" style="padding-top: 10px; padding-bottom: 10px;">
-    <div class="horizontalAlignContent">
+    <div class="horizontalAlignContentProfile">
         <div class="signupFormLogin">
             <div class="userProfileInformation">
                 <form:form id="signupForm" modelAttribute="userProfile" action="/addOrUpdateUserProfile" method="POST">
@@ -44,8 +44,16 @@
                     <input id="pullFacebookProfilePhotos" type="button" class="pinkButton" value="Pull Facebook Profile Pictures" />
                 </c:otherwise>
             </c:choose>
-            </div>
         </div>
+        <div class="loginSpacer"></div>
+        <div class="goToDatingProfileForm">
+            <span class="signupBlue">Dating Profile:</span>
+            <br>
+            <span class="normalText">Click here to edit your dating profile.</span>
+            <input id="editDatingProfile" type="button" class="pinkButton" value="Edit My Dating Profile" />
+        </div>
+    </div>
+
         <div id="fb-root"></div>
         <script>
             $(function() {
@@ -60,6 +68,10 @@
                 $( "#viewFacebookProfilePhotos" ).click(function() {
                     window.location = "/chooseFacebookPhotos";
                 });
+
+                $( "#editDatingProfile").click(function() {
+                    window.location = "/datingProfile";
+                })
             });
 
             function verifyUserWantsToRepullFacebookProfilePictures(){
@@ -127,16 +139,21 @@
                                                                         if(fqlResponse != null && fqlResponse != undefined && fqlResponse.length != null && fqlResponse != undefined &&
                                                                                 fqlResponse.length > 0){
                                                                             $.ajax({
-                                                                                type: "GET",
                                                                                 url: "/saveFacebookProfilePhotos",
-                                                                                data : "fqlResponse=" + JSON.stringify(fqlResponse),
-                                                                                success : function(response) {
+                                                                                type: "POST",
+                                                                                dataType: "json",
+                                                                                data: JSON.stringify({ fqlResponse: fqlResponse }),
+                                                                                contentType: "application/json",
+                                                                                mimeType: 'application/json',
+                                                                                success: function(response) {
                                                                                     window.location = "/chooseFacebookPhotos";
                                                                                 },
                                                                                 error : function(e) {
-                                                                                    alert('Error: ' + e);
+                                                                                    alert('error saving photos');
                                                                                 }
                                                                             });
+
+
                                                                         }else{
                                                                             alert('no photos in the album');
                                                                         }

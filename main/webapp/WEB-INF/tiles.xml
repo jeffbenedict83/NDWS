@@ -31,6 +31,11 @@
         <put-attribute name="headerRight" value="/WEB-INF/pages/template/secureHeaderRight.jsp" />
         <put-attribute name="body" value="/WEB-INF/pages/profile/profile.jsp" />
     </definition>
+    <definition name="datingProfile" extends="base.definition">
+        <put-attribute name="title" value="Formerly LDS Singles" />
+        <put-attribute name="headerRight" value="/WEB-INF/pages/template/secureHeaderRight.jsp" />
+        <put-attribute name="body" value="/WEB-INF/pages/profile/datingProfile.jsp" />
+    </definition>
     <definition name="chooseFacebookPhotos" extends="base.definition">
         <put-attribute name="title" value="Formerly LDS Singles" />
         <put-attribute name="headerRight" value="/WEB-INF/pages/template/secureHeaderRight.jsp" />

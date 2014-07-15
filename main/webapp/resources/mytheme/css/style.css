@@ -129,16 +129,34 @@ body{
 .sign-ligin-btns ul li a.signup{
 	background:#53CBE9;
 	color:#FFF;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    border-radius: 0.15em;
+    -webkit-border-radius: 0.15em;
+    -moz-border-radius: 0.15em;
+    -o-border-radius: 0.15em;
 }
 .sign-ligin-btns ul li a.signup:hover{
-	background: #43C5E6;
+	/*background: #43C5E6;*/
+    background: #000000;
 }
 .sign-ligin-btns ul li a.login{
 	background:#F36EA7;
 	color:#FFF;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    border-radius: 0.15em;
+    -webkit-border-radius: 0.15em;
+    -moz-border-radius: 0.15em;
+    -o-border-radius: 0.15em;
 }
 .sign-ligin-btns ul li a.login:hover{
-	background: #EE639F;
+	/*background: #EE639F;*/
+    background: #000000;
 }
 /*---End-header----*/
 /*--slider--*/
@@ -389,7 +407,8 @@ body{
 	-o-transition: 0.5s all;
 }
 .footer-grid input[type="submit"]:hover {
-	background: #EE639F;
+	/*background: #EE639F;*/
+    background: #000000;
 }
 .footer-grids {
 	padding: 3em 0 5em;

@@ -131,16 +131,19 @@ public class UserFacebookProfilePhotoController {
         return new ModelAndView("chooseFacebookPhotos");
     }
 
-    @RequestMapping(value="/saveFacebookProfilePhotos", method = RequestMethod.GET)
+
+    @RequestMapping(value="/saveFacebookProfilePhotos", method = RequestMethod.POST)
     public @ResponseBody
-    String saveFacebookProfilePhotos(@RequestParam("fqlResponse") String fqlResponse) {
+    String saveFacebookProfilePhotos(@RequestBody String fqlResponse) {
         try{
-            JSONArray jsonArray  = (JSONArray)new JSONParser().parse(fqlResponse);
+            JSONObject json = (JSONObject)new JSONParser().parse(fqlResponse);
+            JSONArray jsonArray = (JSONArray)new JSONParser().parse(json.get("fqlResponse").toString());
+
             saveAllUserFacebookProfilePhotos(jsonArray);
         }catch(Exception e){
             e.printStackTrace();
         }
-        return "success";
+        return "{\"status\":\"SUCCESS\"}";
     }
 
     public boolean saveAllUserFacebookProfilePhotos(JSONArray jsonArray) {

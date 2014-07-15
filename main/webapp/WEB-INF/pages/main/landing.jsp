@@ -3,7 +3,6 @@
 <div class="content">
 <h3>Message : ${message}</h3>
 <h3>Username : ${username}</h3>
-
-<a href="/profile">Update your profile</a>
+<a href="/profile">Update Your Profiles</a>
 </div>
 <%--end-content--%>

@@ -106,7 +106,7 @@
                             }
                         }
                     }else{
-                        alert('error');
+                        alert('No Photos');
                     }
                 }
             },

@@ -23,6 +23,12 @@
     *display: inline;
     vertical-align: text-top;
 }
+.goToDatingProfileForm{
+    width: 270px;
+    display: inline-block;
+    *display: inline;
+    vertical-align: text-top;
+}
 
 .signupBlue{
     color: #53CBE9;
@@ -47,6 +53,24 @@
     margin-left:auto;
     margin-right:auto;
     width: 639px;
+}
+
+.horizontalAlignContentLogin{
+    margin-left:auto;
+    margin-right:auto;
+    width: 639px;
+}
+
+.horizontalAlignContentProfile{
+    margin-left:auto;
+    margin-right:auto;
+    width: 1007px;
+}
+
+.horizontalAlignContentDatingProfile{
+    margin-left:auto;
+    margin-right:auto;
+    width: 250px;
 }
 
 .hideContainer{
@@ -119,7 +143,7 @@
 }
 
 .pinkButton:hover{
-    background-color:#EE639F;
+    background-color:#000000;
 }
 
 .blueButton{
@@ -147,7 +171,7 @@
 }
 
 .blueButton:hover{
-    background-color:#43C5E6;
+    background-color:#000000;
 }
 
 .normalText{
